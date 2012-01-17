@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>anim</title>
+        <script type="text/javascript" src="lib/jquery.js"></script>
+        <script type="text/javascript" src="lib/jquery.timers.js"></script>
+        <script type="text/javascript" src="lib/jquery.color.js"></script>
+        <script type="text/javascript" src="lib/lib.js"></script>
+
+        <script type="text/javascript" src="../lib/br4.js"></script>
+        <script type="text/javascript" src="../lib/br4.objects.js"></script>
+    
+        <script>
+            var can;
+            var rect = {};
+            var circle;
+            var rect1;
+            var rect2;
+            var rect3;
+            var rect4;
+            var rect5;
+            var rect6;
+            var rect7;
+            $(document).ready( function() {
+                can = br4.createC( 'drawHere', { width: 100, height: 100, backgroundColor: '#000' } );
+
+                rect1 = can.createO( br4.o.gRectangle, { x: 2, y: 10, width: 5, height: 5, lineColor: '#f00', lineWidth: 0, backgroundColor: '#fff', middleMode: true } );
+                rect1.mousemove( function() { console.log('1'); } );
+                rect1.mouseclick( function() { console.log( 'click1' ); } );
+                
+                rect2 = can.createO( br4.o.gRectangle, { x: 8, y: 10, width: 5, height:5, lineColor: '#f00', lineWidth: 0, backgroundColor: '#fff', middleMode: true } );
+                rect2.mousemove( function() { console.log('2'); } );
+                rect3 = can.createO( br4.o.gRectangle, { x: 15, y: 10, width: 5, height: 5, lineColor: '#f00', lineWidth: 0, backgroundColor: '#fff', middleMode: true } );
+                rect3.mousemove( function() { console.log('3'); } );
+                rect4 = can.createO( br4.o.gRectangle, { x: 2, y: 15, width: 5, height:5, lineColor: '#f00', lineWidth: 0, backgroundColor: '#fff', middleMode: true } );
+                rect4.mousemove( function() { console.log('4'); } );
+                rect5 = can.createO( br4.o.gRectangle, { x: 2, y: 25, width: 5, height: 5, lineColor: '#f00', lineWidth: 0, backgroundColor: '#fff', middleMode: true } );
+                rect5.mousemove( function() { console.log('5'); } );
+                rect6 = can.createO( br4.o.gRectangle, { x: 14, y: 25, width: 5, height:5, lineColor: '#f00', lineWidth: 0, backgroundColor: '#fff', middleMode: true } );
+                rect6.mousemove( function() { console.log('6'); } );
+                rect7 = can.createO( br4.o.gRectangle, { x: 2, y: 1, width: 5, height:5, lineColor: '#f00', lineWidth: 0, backgroundColor: '#fff', middleMode: true } );
+                rect7.mousemove( function() { console.log('7'); } );
+
+                can.eventHandler.traverseTree();
+                
+                $('#delete1').click( function() {
+                    rect7.remove();
+                    can.eventHandler.traverseTree();
+                    return false;
+                } );
+                $('#delete2').click( function() {
+                    rect2.remove();
+                    can.eventHandler.traverseTree();
+                    return false;
+                } );
+                $('#delete3').click( function() {
+                    rect3.remove();
+                    can.eventHandler.traverseTree();
+                    return false;
+                } );
+                $('#delete4').click( function() {
+                    rect1.remove();
+                    can.eventHandler.traverseTree();
+                    return false;
+                } );
+            } );
+        </script>
+        
+    </head>
+    <body>
+        <a href="" id="delete1">delete1</a><br>
+        <a href="" id="delete2">delete2</a><br>
+        <a href="" id="delete3">delete3</a><br>
+        <a href="" id="delete4">delete4</a><br>
+        <div id="drawHere"></div>
+        <div id="debug"></div>
+    </body>
+</html>

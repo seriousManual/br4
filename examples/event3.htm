@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>anim</title>
+        <script type="text/javascript" src="lib/jquery.js"></script>
+        <script type="text/javascript" src="lib/jquery.timers.js"></script>
+        <script type="text/javascript" src="lib/jquery.color.js"></script>
+        <script type="text/javascript" src="lib/lib.js"></script>
+
+        <script type="text/javascript" src="../lib/br4.js"></script>
+        <script type="text/javascript" src="../lib/br4.objects.js"></script>
+        
+        <script>
+            $(document).ready( function() {
+                var can = br4.createC( 'drawHere', { width: 400, height: 400, backgroundColor: '#000' } );
+                
+                var line1 = can.createO( br4.o.gLine, { x: 200, y: 0, angle: 90, lineLength: 1000, lineWidth: 2, lineColor: '#fff', backgroundColor: '#fff' } );
+                var line2 = can.createO( br4.o.gLine, { x: 0, y: 200, angle: 0, lineLength: 1000, lineWidth: 2, lineColor: '#fff', backgroundColor: '#fff' } );
+                
+                can.mousemove( function( e ) { 
+                    line1.x( e.x );
+                    line2.y( e.y );
+                } );
+
+            } );
+        </script>
+        
+    </head>
+    <body>
+        <a id="klicker">klick</a>
+        <a id="klicker2">klick</a>
+        <div id="drawHere"></div>
+    </body>
+</html>

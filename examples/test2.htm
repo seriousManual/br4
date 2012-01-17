@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>anim</title>
+        <script type="text/javascript" src="lib/jquery.js"></script>
+        <script type="text/javascript" src="lib/jquery.timers.js"></script>
+        <script type="text/javascript" src="lib/jquery.color.js"></script>
+
+        <script>
+            window.onload = function() {
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+             
+                var x = xStart = 80;
+                var y = yStart = 20;
+                var w = wStart = 200;
+                var h = hStart = 100;
+             
+                var r = 30;
+                var lineW = 2;
+                
+                ctx.lineWidth = lineW;
+                ctx.fillStyle = '#f00';
+                ctx.strokeStyle = '#000';
+                
+                for( var i = 0; i < 2; i++ ) {
+                    x = xStart;
+                    y = yStart;
+                    w = wStart;
+                    h = hStart;
+                    
+                    if ( i === 1 ) {
+                        x = x + lineW / 2;
+                        y = y + lineW / 2;
+                        w = w - lineW;
+                        h = h - lineW;
+                        r = 26;
+                    }
+                
+                    ctx.beginPath();
+                    x = x + r;
+                    ctx.moveTo( x, y );
+                    x = x + w - 2*r;
+
+                    ctx.lineTo( x, y );
+                    x = x+r;
+                    ctx.arcTo( x, y, x, y+r, r);
+                    y = y + h - 2*r;
+                    ctx.lineTo(x, y);
+
+                    ctx.arcTo( x, y+r, x-r, y+r, r);
+                    x = x - w + r;
+                    y = y+r;
+                    ctx.lineTo( x, y );
+                    
+                    ctx.arcTo( x-r, y, x-r, y-r, r);
+                    x = x-r;
+                    y = y - h + 2*r;
+                    ctx.lineTo( x, y );
+
+                    ctx.arcTo( x, y-r, x+r, y-r, r);
+                    
+                    if ( i === 0 ) {
+                        ctx.fill();
+                    } else {
+                        ctx.stroke();
+                    }
+                }
+            }
+
+        </script>
+        
+        
+        
+    </head>
+    <body>
+        <canvas id="myCanvas" width=800" height="800"></canvas>
+    </body>
+</html>
+
+

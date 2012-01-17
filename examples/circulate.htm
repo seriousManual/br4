@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>pendulum</title>
+        
+        <!-- check out jsSTD! -->
+        <script type="text/javascript" src="lib/jquery.js"></script>
+        <script type="text/javascript" src="lib/jquery.timers.js"></script>
+        <script type="text/javascript" src="lib/jquery.color.js"></script>
+        <script type="text/javascript" src="lib/lib.js"></script>
+
+        <script type="text/javascript" src="../lib/br4.js"></script>
+        <script type="text/javascript" src="../lib/br4.objects.js"></script>
+        
+        <script>
+        
+            var sec = null;
+            var pri = null;
+            $(document).ready( function() {
+                var can = br4.createC( 'drawHere', { width: 450, height: 450, backgroundColor: '#000' } );
+                
+                sec = can.createO( br4.o.gLine, { x: 225, y: 150, angle: 65, lineLength: 160, lineWidth: 5, lineColor: '#fff', middleMode:false } );
+                pri = can.createO( br4.o.gCircle, { x: 225, y: 150, radius: 30, backgroundColor: '#fff', middleMode: true } );
+                ter = can.createO( br4.o.gText, { x: 225, y: 390, fontSize: 60, fontFace: 'Verdana', middleMode: true } );
+                
+                ter.fontColor( '#f0f' ).opacity( 1 );
+                second();
+                $({big:'bang'}).everyTime( 1000, 'second', second );
+            } );
+
+            var l = true;
+            function second() {
+                var n = 65;
+                var n2 = 0
+                var o = 0;
+                var br = 12;
+
+                if ( l ) {
+                    n = 115;
+                    n2 = 80;
+                    br = 1;
+                    l = false;
+                    o = 1;
+                } else {
+                    l = true;
+                }
+
+                sec.animate( { angle: n }, 999 );
+                pri.animate( { radius: n2, opacity: o }, 999 );
+                //pri.animate( { fontSize: br }, 999 );
+                
+                ter.text( new Date().getSeconds() );
+            }
+        </script>
+        
+    </head>
+    <body>
+        <div id="drawHere"></div>
+    </body>
+</html>

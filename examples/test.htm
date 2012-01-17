@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>anim</title>
+        <script type="text/javascript" src="lib/jquery.js"></script>
+        <script type="text/javascript" src="lib/jquery.timers.js"></script>
+        <script type="text/javascript" src="lib/jquery.color.js"></script>
+
+        <script>
+            var myCollection = [];
+
+            for( var i = 0; i < 10; i++ ) {
+                var x = Math.random() * 100;
+                myCollection.push( ( { x: function() { return x; } } ) );
+            }
+            
+            for( var k in myCollection ) {
+                console.log( myCollection[ k ].x() );
+            }   
+
+        </script>
+        
+        
+        
+    </head>
+    <body>
+        <div id="drawHere"></div>
+    </body>
+</html>

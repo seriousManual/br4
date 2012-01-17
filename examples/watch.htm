@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>watch</title>
+        
+        <!-- check out jsSTD! -->
+        <script type="text/javascript" src="lib/jquery.js"></script>
+        <script type="text/javascript" src="lib/jquery.timers.js"></script>
+        <script type="text/javascript" src="lib/jquery.color.js"></script>
+        <script type="text/javascript" src="lib/lib.js"></script>
+
+        <script type="text/javascript" src="../lib/br4.js"></script>
+        <script type="text/javascript" src="../lib/br4.objects.js"></script>
+
+        <script>
+            var sec = null;
+            var min = null;
+            var hou = null;
+            var myCanvas = null;
+        
+            $(document).ready( function() {
+                var can = br4.createC( 'drawHere', { width: 450, height: 450, lineColor:'#000', backgroundColor: '#000' } );
+                
+                sec = can.createO( br4.o.gLine, { x: 225, y: 225, angle: -90, lineLength: 170, lineWidth: 2, lineColor: '#fff' } );
+                min = can.createO( br4.o.gLine, { x: 225, y: 225, angle: -90, lineLength: 170, lineWidth: 4, lineColor: '#fff' } );
+                hou = can.createO( br4.o.gLine, { x: 225, y: 225, angle: -90, lineLength: 100, lineWidth: 7, lineColor: '#fff' } );
+                
+                can.createO( br4.o.gCircle, { x: 225-4, y: 225-4, radius: 6, lineWidth: 7, lineColor: '#fff', backgroundColor: '#fff' } );
+                
+                drawLines( can );
+                
+                second( true );
+
+                $({bang:'bang'}).everyTime( 1000, 'second', second );
+            } );
+            
+            function drawLines( can ) {
+                var hypo = 200;
+                var angle = 0;
+                var tmpX = 0;
+                var tmpY = 0;
+                var lineLength = 5;
+                var lineWidth = 2;
+                for( var i = 0; i < 360; i = i+(360/60) ) {
+                    angle = 90 - i;
+                    angle = Math.deg2rad( angle );
+                    tmpX = Math.cos( angle ) * hypo;
+                    tmpY = Math.tan( angle ) * tmpX;
+                    
+                    tmpX = tmpX + 225;
+                    tmpY = tmpY + 225;
+                    
+                    lineLength = 8;
+                    lineWidth = 2;
+                    if ( i % 10 == 0 ) {
+                        lineLength = 15;
+                        lineWidth = 4;
+                    }
+                    can.createO( br4.o.gLine, { x: tmpX, y: tmpY, angle: -1*(i+90), lineLength: lineLength, lineWidth: lineWidth, lineColor: '#fff' } );
+                }
+            }
+            
+            function second( force ) {
+                var d = new Date();
+                var s = d.getSeconds();
+                var m = d.getMinutes();
+                var h = d.getHours();
+
+                sec.angle( time2deg( s, 60 ) - 90 );
+
+                var minAngle = time2deg( m, 60 ) - 90 + time2deg( s, 60, 6 );
+                min.angle( minAngle );
+
+                h = h % 12;
+                var houAngle = time2deg( h, 12 ) - 90 + time2deg( m, 60, 30 );
+
+                hou.angle( houAngle );
+            }
+            function time2deg(x,b,deg) {
+                if ( !deg ) deg = 360;
+                return (x / b * deg);
+            }
+        </script>
+        
+    </head>
+    <body style="background-color:#000">
+        <div id="drawHere" style="text-align:center"></div>
+    </body>
+</html>

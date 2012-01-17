@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>anim</title>
+        <script type="text/javascript" src="lib/jquery.js"></script>
+        <script type="text/javascript" src="lib/jquery.timers.js"></script>
+        <script type="text/javascript" src="lib/jquery.color.js"></script>
+
+        <script>
+            window.onload = function() {
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+             
+                var x = 80;
+                var y = 20;
+                var w = 250;
+                var h = 200;
+             
+                var r = 20;
+                var lineW = 3;
+                
+                ctx.lineWidth = lineW;
+                ctx.fillStyle = '#f00';
+                ctx.strokeStyle = '#000';
+                
+                var data = {
+                    c1: {
+                        p0: { x: x, y: y },
+                        pS: { x: x, y: y + r/2 },
+                        pE: { x: x+r, y: y }
+                    },
+                    c2: {
+                        p0: { x: x+w, y: y },
+                        pS: { x: x+w-r, y: y },
+                        pE: { x: x+w, y: y+r }
+                    },
+                    c3: {
+                        p0: { x: x+w, y: y+h },
+                        pS: { x: x+w, y: y+h-r },
+                        pE: { x: x+w-r, y: y+h }
+                    },
+                    c4: {
+                        p0: { x: x, y: y+h },
+                        pS: { x: x+r, y: y+h },
+                        pE: { x: x, y: y+h-r }
+                    }
+                }
+                
+                ctx.beginPath();
+                ctx.moveTo( data.c4.pE.x, data.c4.pE.y );
+                $.each( data, function( k, v ) {
+                    ctx.arcTo( v.p0.x, v.p0.y, v.pE.x, v.pE.y, r );
+                } );
+                ctx.closePath();
+                ctx.stroke();
+            }
+
+        </script>
+        
+        
+        
+    </head>
+    <body>
+        <canvas id="myCanvas" width=800" height="800"></canvas>
+    </body>
+</html>
+
+
+
+
